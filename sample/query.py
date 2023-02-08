@@ -1,6 +1,6 @@
 from data import warehouse1, warehouse2
 
-name = input("Please enter your name: ")
+name = input("Please enter your name:  ")
 print(f"Hallo, {name.capitalize()}!")
 menu = """1. List items by warehouse
 2. Search an item and place an order
