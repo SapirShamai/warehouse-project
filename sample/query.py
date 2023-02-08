@@ -1,4 +1,5 @@
 from data import stock
+from collections import Counter
 
 name = input("Please enter your name: ").capitalize()
 print(f"Hallo, {name}!")
@@ -9,15 +10,26 @@ number = int(input(f"What would you like to do: \n{menu}\nType the number of the
 
 if number == 1:
     print("\n### Warehouse 1 : ###\n")
+    ware1 = []
     for i in stock:
         items = i["state"] + " " + i["category"]
+        ware1.append(items)
         if i["warehouse"] == 1:
             print(items)
+
     print("\n### Warehouse 2 : ###\n")
+    ware2 = []
     for i in stock:
         items = i["state"] + " " + i["category"]
+        ware2.append(items)
         if i["warehouse"] == 2:
             print(items)
+
+    print(f"Total items in warehouse1: {Counter(ware1)}")
+    print(f"Total items in warehouse2: {Counter(ware2)}")
+    for i in ware1:
+        print(i)
+
 
     print(f"Thank you for your visit, {name}!")
     quit()
@@ -27,12 +39,13 @@ elif number == 2:
     x = 0
     while x == 0:
         item_name = input("What is the name of the item? ").lower()
+        print(f"- {item_name}")
         amount = 0
         for item in stock:
             if (item["state"] + " " + item["category"]).lower() == item_name:
                 amount += 1
 
-        print(f"Amount available: {amount}")
+        print(f"Total amount available: {amount}")
         amount1 = 0
         amount2 = 0
 
@@ -41,6 +54,8 @@ elif number == 2:
                 amount1 += 1
             elif (item["state"] + " " + item["category"]).lower() == item_name and item["warehouse"] == 2:
                 amount2 += 1
+
+
         total_amount = amount1 + amount2
         if amount1 > amount2:
             print(f"In Warehouse 1 the amount is higher. amount: {amount1}")
@@ -49,7 +64,7 @@ elif number == 2:
         elif amount2 > amount1:
             print(f"In Warehouse 2 the amount is higher. amount: {amount2}")
         else:
-            answer = input(f"Not in stock\nWould you like to search for another item?  Y/N").lower()
+            answer = input(f"Not in stock\nWould you like to search for another item?  Y/N ").lower()
             if answer == "y" or answer == "yes":
                 continue
             else:
@@ -61,17 +76,17 @@ elif number == 2:
                 how_many = int(input(f"How many {item_name}s would you like? "))
                 if 0 < how_many <= total_amount:
                     print(f"Your order: {how_many} {item_name} is placed!")
-                    answer = input("Would you like to continue shopping?  Y/N").lower()
+                    answer = input("Would you like to continue shopping?  Y/N ").lower()
                     if answer == "y" or answer == "yes":
                         continue
                     else:
                         x += 1
                 else:
                     answer = input(
-                        f"Error!\nThe maximus available is: {total_amount} items, would you like to take it instead?  Y/N").lower()
+                        f"Error!\nThe maximus available is: {total_amount} items, would you like to take it instead?  Y/N ").lower()
                     if answer == "y" or answer == "yes":
                         print(f"Your order: {total_amount} {item_name} is placed!")
-                        answer = input("Would you like to continue shopping?  Y/N").lower()
+                        answer = input("Would you like to continue shopping?  Y/N ").lower()
                         if answer == "y" or answer == "yes":
                             continue
                         else:
