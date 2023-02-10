@@ -1,0 +1,133 @@
+from data import stock
+from datetime import datetime
+from collections import Counter
+
+
+# to get the name of the user:
+def get_name():
+    return input("Please enter your name: ").capitalize()
+
+
+
+# to greet the user:
+def greet_user(name):
+    return (f"Hallo, {name}!")
+
+
+# to get number of operator from the menu:
+def select_operator():
+    menu = """
+    1. List items by warehouse
+    2. Search an item and place an order
+    3. Browse by category
+    4. Quit
+    """
+    return int(input(f"What would you like to do: \n{menu}\nType the number of the operation: "))
+
+
+# print the list of items:
+def list_of_items():
+    print("\n### Warehouse 1 : ###\n")
+
+    count_ware1 = 0
+    for i in stock:
+        items = i["state"] + " " + i["category"]
+        if i["warehouse"] == 1:
+            count_ware1 += 1
+            print(items)
+
+    print("\n### Warehouse 2 : ###\n")
+
+    count_ware2 = 0
+    for i in stock:
+        items = i["state"] + " " + i["category"]
+        if i["warehouse"] == 2:
+            count_ware2 += 1
+            print(items)
+
+    return f"\nTotal items in warehouse1: {count_ware1}\nTotal items in warehouse2: {count_ware2}\n"
+
+
+# search and order items:
+def search_and_order_item():
+    x = 0
+    while x == 0:
+        item_name = input("What is the name of the item? ").lower()
+        print(f"- {item_name}")
+        amount = 0
+        for item in stock:
+            if (item["state"] + " " + item["category"]).lower() == item_name:
+                amount += 1
+
+        print(f"Total amount available: {amount}")
+        amount1 = 0
+        amount2 = 0
+
+        print("Location: ")
+        for item in stock:
+            now = datetime.now()
+            item_time = datetime.strptime(item["date_of_stock"], "%Y-%m-%d %H:%M:%S")
+
+            if (item["state"] + " " + item["category"]).lower() == item_name and item["warehouse"] == 1:
+                amount1 += 1
+                print(f"-Warehouse 1 (in stock for {(now - item_time).days} days)")
+            elif (item["state"] + " " + item["category"]).lower() == item_name and item["warehouse"] == 2:
+                amount2 += 1
+                print(f"-Warehouse 2 (in stock for {(now - item_time).days} days)")
+
+        total_amount = amount1 + amount2
+        if amount1 > amount2:
+            print(f"Maximum availability {amount1} in Warehouse 1")
+        elif amount1 == amount2 and amount1 != 0:
+            print(f"The amount of items is the same in both warehouses: {amount1}")
+        elif amount2 > amount1:
+            print(f"Maximum availability {amount2} in Warehouse 2")
+        else:
+            answer = input(f"Not in stock\nWould you like to search for another item?  Y/N ").lower()
+            if answer == "y" or answer == "yes":
+                continue
+            else:
+                x += 1
+
+        if total_amount > 0:
+            answer = input(f"Would you like to place an order for {item_name}?  Y/N ").lower()
+            if answer == "y" or answer == "yes":
+                how_many = int(input(f"How many {item_name}s would you like? "))
+                if 0 < how_many <= total_amount:
+                    print(f"Your order: {how_many} {item_name} is placed!")
+                    answer = input("Would you like to continue shopping?  Y/N ").lower()
+                    if answer == "y" or answer == "yes":
+                        continue
+                    else:
+                        x += 1
+                else:
+                    answer = input(
+                        f"Error!\nThe maximus available is: {total_amount} items, would you like to take it instead?  Y/N ").lower()
+                    if answer == "y" or answer == "yes":
+                        print(f"Your order: {total_amount} {item_name} is placed!")
+                        answer = input("Would you like to continue shopping?  Y/N ").lower()
+                        if answer == "y" or answer == "yes":
+                            continue
+                        else:
+                            x += 1
+                    else:
+                        x += 1
+            else:
+                x += 1
+
+
+# browse items by category:
+def browse_by_category():
+    my_category_list = []
+    for i in stock:
+        my_category_list.append(i["category"])
+        categories = dict(Counter(my_category_list))
+    for index, (key, value) in enumerate(categories.items()):
+        print(f"{index + 1}. {key} ({value})")
+
+    users_choice = int(input("Type the number of the category to browse: "))
+    my_str_category = (list(categories)[users_choice - 1])
+    print(f"\nList of {my_str_category} available:")
+    for i in stock:
+        if i["category"] == my_str_category:
+            print("-", i["state"], i["category"] + ", Warehouse:", i["warehouse"])
