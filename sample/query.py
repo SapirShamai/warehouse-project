@@ -13,28 +13,24 @@ number = int(input(f"What would you like to do: \n{menu}\nType the number of the
 if number == 1:
     print("\n### Warehouse 1 : ###\n")
 
+    count_ware1 = 0
     for i in stock:
         items = i["state"] + " " + i["category"]
-        count_ware1 = 0
         if i["warehouse"] == 1:
             count_ware1 += 1
             print(items)
 
-
     print("\n### Warehouse 2 : ###\n")
 
+    count_ware2 = 0
     for i in stock:
         items = i["state"] + " " + i["category"]
-        count_ware2 = 0
         if i["warehouse"] == 2:
             count_ware2 += 1
             print(items)
 
-    # for i in stock:
-    #
-    #     print(items)
-    #     print(f"Total items in warehouse1: {count_ware1}")
-    #     print(f"Total items in warehouse2: {count_ware2}")
+    print(f"\nTotal items in warehouse1: {count_ware1}")
+    print(f"Total items in warehouse2: {count_ware2}\n")
 
     print(f"Thank you for your visit, {name}!")
     quit()
@@ -115,7 +111,12 @@ elif number == 3:
     for index, (key, value) in enumerate(categories.items()):
         print(f"{index + 1}. {key} ({value})")
 
-    users_choice = int(input("Type the number of the category to browse"))
+    users_choice = int(input("Type the number of the category to browse: "))
+    my_str_category = (list(categories)[users_choice - 1])
+    print(f"List of {my_str_category} available:")
+    for i in stock:
+        if i["category"] == my_str_category:
+            print("-", i["state"], i["category"] + ", Warehouse:", i["warehouse"])
 
 
 
