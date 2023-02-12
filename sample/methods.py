@@ -8,7 +8,6 @@ def get_name():
     return input("Please enter your name: ").capitalize()
 
 
-
 # to greet the user:
 def greet_user(name):
     return (f"Hallo, {name}!")
@@ -44,8 +43,19 @@ def list_of_items():
         if i["warehouse"] == 2:
             count_ware2 += 1
             print(items)
+    a = f"\nTotal items in warehouse1: {count_ware1}"
+    b = f"\nTotal items in warehouse2: {count_ware2}\n"
+    return a + b
 
-    return f"\nTotal items in warehouse1: {count_ware1}\nTotal items in warehouse2: {count_ware2}\n"
+
+### new func for 2
+# def search_item():
+#     item_name = input("What is the name of the item? ").lower()
+#     amount = 0
+#     for item in stock:
+#         if (item["state"] + " " + item["category"]).lower() == item_name:
+#             amount += 1
+#     return f"Total amount available: {amount}"
 
 
 # search and order items:
@@ -116,18 +126,21 @@ def search_and_order_item():
                 x += 1
 
 
-# browse items by category:
-def browse_by_category():
+# browse items by category: takes a list
+def browse_by_category(stock):
     my_category_list = []
     for i in stock:
         my_category_list.append(i["category"])
-        categories = dict(Counter(my_category_list))
+    categories = dict(Counter(my_category_list))
     for index, (key, value) in enumerate(categories.items()):
         print(f"{index + 1}. {key} ({value})")
 
     users_choice = int(input("Type the number of the category to browse: "))
     my_str_category = (list(categories)[users_choice - 1])
     print(f"\nList of {my_str_category} available:")
+    selected_items_from_category = []        # adding all the items from the same category to a new list
     for i in stock:
         if i["category"] == my_str_category:
-            print("-", i["state"], i["category"] + ", Warehouse:", i["warehouse"])
+            x = ("- " + i["state"] + " " + i["category"] + ", Warehouse: " + str(i["warehouse"]))
+            selected_items_from_category.append(x)
+    return "\n".join(selected_items_from_category)   # returning the list
