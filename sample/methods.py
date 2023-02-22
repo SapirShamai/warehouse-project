@@ -24,28 +24,23 @@ def select_operator():
     return int(input(f"What would you like to do: \n{menu}\nType the number of the operation: "))
 
 
-# print the list of items:
+# print the list of items and how many in which warehouse:
 def list_of_items():
-    print("\n### Warehouse 1 : ###\n")
 
-    count_ware1 = 0
+    warehouses = {}
     for i in stock:
+        key = i["warehouse"]                           # set new key
         items = i["state"] + " " + i["category"]
-        if i["warehouse"] == 1:
-            count_ware1 += 1
-            print(items)
+        print(items)                                   # print all items
+        if key not in warehouses:
+            warehouses[key] = 1                       # add new key with value 1
 
-    print("\n### Warehouse 2 : ###\n")
+        else:
+            warehouses[key] += 1                  # add 1 to value
 
-    count_ware2 = 0
-    for i in stock:
-        items = i["state"] + " " + i["category"]
-        if i["warehouse"] == 2:
-            count_ware2 += 1
-            print(items)
-    a = f"\nTotal items in warehouse1: {count_ware1}"
-    b = f"\nTotal items in warehouse2: {count_ware2}\n"
-    return a + b
+    for key, value in warehouses.items():
+        print(f"Warehouse {key}: {value} items ")
+
 
 
 ### new func for 2

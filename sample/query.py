@@ -11,12 +11,16 @@ print(greet_user(user_name))
 user_selection = select_operator()
 
 # Execute operation:
-if user_selection == 1:
-    print(list_of_items())
+if user_selection == 1:           # list of each warehouse and the items in it plus total items in each warehouse
+    list_of_items()
+
+
 
 elif user_selection == 2:
     #print(search_item())
     print(search_and_order_item())
+
+
 
 elif user_selection == 3:
     print(browse_by_category(stock))
