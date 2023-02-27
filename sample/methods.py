@@ -1,4 +1,4 @@
-from data import stock
+from data import stock, personnel
 from datetime import datetime
 from collections import Counter
 
@@ -25,9 +25,11 @@ def select_operator():
 
 # print the list of items and how many in which warehouse:
 def list_of_items():
-
+    total_amount = 0
     warehouses = {}
+
     for i in stock:
+        total_amount += 1
         key = i["warehouse"]                           # set new key
         items = i["state"] + " " + i["category"]
         print(items)                                   # print all items
@@ -39,6 +41,7 @@ def list_of_items():
 
     for key, value in warehouses.items():
         print(f"Warehouse {key}: {value} items ")
+    return total_amount                               # returns the num of total items in data
 
 
 # search and order items:
@@ -94,7 +97,7 @@ def show_search_result(item_name, stock):                          # search item
     return warehouses
 
 
-# order the item:  # todo: keep working on the script according to my notes
+# order the item:
 def order_an_item(item_name, warehouses):
     '''
     this function is taking item and dict with keys(warehouse) and values(amount available)
@@ -102,14 +105,15 @@ def order_an_item(item_name, warehouses):
     or None if order has not been placed
     '''
     order = input(f"Would you like to place an order for {item_name}?  Y/N \n").lower()
-    if order == "y" or order == "yes":
+    if order == "y" or order == "yes":                             # if the user wants to order he should be registered
+
         key = int(input("From which warehouse would you like to place your order?\n"))
         if key in warehouses:
             my_max_amount = warehouses[key]                          # to get the value from the key chosen by th user
             amount_by_user = int(input(f"How many {item_name}s would you like from Warehouse {key} ?\n"))
             if 0 < amount_by_user <= my_max_amount:
                 print(f"Your order: {amount_by_user} {item_name}s from warehouse {key} is placed!")
-                return amount_by_user, item_name
+                return str(amount_by_user) + " " + item_name
                 # would you like to order anything else?
 
             else:
@@ -147,3 +151,13 @@ def browse_by_category(stock):
             print(x)
 
     return my_str_category
+
+
+# def name_and_password(personnel):
+#     my_employees = []
+#     for user in personnel:
+#         print(user["user_name"], user["password"])
+#
+#
+#
+# name_and_password(personnel)

@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="new file">
+    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="converted all to functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/query.py" afterDir="false" />
@@ -61,7 +61,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676202961982</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="converted all to functions">
+      <created>1677173169684</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1677173169684</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -78,7 +85,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="new file" />
     <MESSAGE value="mada some changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="mada some changes" />
+    <MESSAGE value="converted all to functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="converted all to functions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
