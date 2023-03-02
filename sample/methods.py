@@ -98,7 +98,7 @@ def show_search_result(item_name, stock):                          # search item
 
 
 # order the item:
-def order_an_item(item_name, warehouses):
+def order_an_item(item_name, warehouses, user_name):
     '''
     this function is taking item and dict with keys(warehouse) and values(amount available)
     returning the item name and the number of the items that the user ordered
@@ -106,28 +106,32 @@ def order_an_item(item_name, warehouses):
     '''
     order = input(f"Would you like to place an order for {item_name}?  Y/N \n").lower()
     if order == "y" or order == "yes":                             # if the user wants to order he should be registered
+        password = input("Enter your password:\n").lower()
 
-        key = int(input("From which warehouse would you like to place your order?\n"))
-        if key in warehouses:
-            my_max_amount = warehouses[key]                          # to get the value from the key chosen by th user
-            amount_by_user = int(input(f"How many {item_name}s would you like from Warehouse {key} ?\n"))
-            if 0 < amount_by_user <= my_max_amount:
-                print(f"Your order: {amount_by_user} {item_name}s from warehouse {key} is placed!")
-                return str(amount_by_user) + " " + item_name
-                # would you like to order anything else?
+        if name_and_password(personnel, user_name, password):
+            print("You are authorized!")
+            key = int(input("From which warehouse would you like to place your order?\n"))
+            if key in warehouses:
+                my_max_amount = warehouses[key]                          # to get the value from the key chosen by th user
+                amount_by_user = int(input(f"How many {item_name}s would you like from Warehouse {key} ?\n"))
+                if 0 < amount_by_user <= my_max_amount:
+                    print(f"Your order: {amount_by_user} {item_name}s from warehouse {key} is placed!")
+                    return str(amount_by_user) + " " + item_name
+                    # would you like to order anything else?
+
+                else:
+                    different_amount = input(f"Error!\nThe maximus available is: {my_max_amount} items in Warehouse {key}, would you like to take it instead?  Y/N\n").lower()
+                    if different_amount == "y" or order == "yes":
+                        print(f"Your order: {my_max_amount} {item_name}s from warehouse {key} is placed!")
+                        return my_max_amount, item_name
+                    # would you like to order anything else?
 
             else:
-                different_amount = input(f"Error!\nThe maximus available is: {my_max_amount} items in Warehouse {key}, would you like to take it instead?  Y/N\n").lower()
-                if different_amount == "y" or order == "yes":
-                    print(f"Your order: {my_max_amount} {item_name}s from warehouse {key} is placed!")
-                    return my_max_amount, item_name
-                # would you like to order anything else?
-
+                print("this item does not exist in this warehouse")
+                return None
+                # would you like to check in a different warehouse?
         else:
-            print("this item does not exist in this warehouse")
-            return None
-            # would you like to check in a different warehouse?
-
+            print("User is not in th system.")
 
 # browse items by category:
 def browse_by_category(stock):
@@ -153,11 +157,41 @@ def browse_by_category(stock):
     return my_str_category
 
 
-# def name_and_password(personnel):
-#     my_employees = []
-#     for user in personnel:
-#         print(user["user_name"], user["password"])
-#
-#
-#
-# name_and_password(personnel)
+def my_user_history(*user_history):
+    '''
+    this function takes a list of users actions and returns then numbered one by one
+    '''
+    for index, action in enumerate(*user_history):
+        print(index + 1, ".", action)
+
+
+# functions for the user system
+
+def pars_users(my_dict_list, my_list):
+    for item in my_dict_list:
+        my_dict = {}
+        my_dict["user_name"] = item["user_name"]
+        my_dict["password"] = item["password"]
+        my_list.append(my_dict)
+        if "head_of" in item:
+            pars_users(item["head_of"], my_list)
+
+
+def name_and_password(personnel, user_name, password):
+    my_employees_list = []
+    for user in personnel:
+        my_dict = {}
+        my_dict["user_name"] = user["user_name"]
+        my_dict["password"] = user["password"]
+        my_employees_list.append(my_dict)
+        if "head_of" in user:
+            pars_users(user["head_of"], my_employees_list)
+    for user in my_employees_list:
+        if user["user_name"] == user_name and user["password"] == password:
+            return True
+    return False
+
+
+# testing:
+#name_and_password(personnel, "Lidia", "parker")
+
