@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="new branch classes">
-      <change afterPath="$PROJECT_DIR$/sample/classes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sample/teting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="created classes.py with 4 main classes" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -109,7 +105,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678186401961</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="created classes.py with 4 main classes">
+      <created>1678451644510</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678451644510</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -130,7 +133,8 @@
     <MESSAGE value="before user system" />
     <MESSAGE value="finished warehouse part3 (functions)!!!" />
     <MESSAGE value="new branch classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="new branch classes" />
+    <MESSAGE value="created classes.py with 4 main classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="created classes.py with 4 main classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
