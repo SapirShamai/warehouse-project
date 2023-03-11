@@ -1,7 +1,8 @@
-from data import stock, personnel
-from datetime import datetime
 from collections import Counter
-
+from loader import Loader
+from classes import *
+stock = Loader(model="stock")   # dict with model and objects keys, objects= 4 warehouse objects
+personnel = Loader(model="personnel")
 
 # to get the name of the user:
 def get_name():
@@ -25,23 +26,20 @@ def select_operator():
 
 # print the list of items and how many in which warehouse:
 def list_of_items():
-    total_amount = 0
-    warehouses = {}
-
-    for i in stock:
-        total_amount += 1
-        key = i["warehouse"]                           # set new key
-        items = i["state"] + " " + i["category"]
-        print(items)                                   # print all items
-        if key not in warehouses:
-            warehouses[key] = 1                       # add new key with value 1
-
-        else:
-            warehouses[key] += 1                  # add 1 to value
-
-    for key, value in warehouses.items():
-        print(f"Warehouse {key}: {value} items ")
-    return total_amount                               # returns the num of total items in data
+    ware_num = int(input("Which warehouse would you like to view?\n"))
+    my_warehouses = []
+    for i in stock:   # items are 4 warehouse objects
+        my_warehouses.append(i.warehouse_id)
+    if str(ware_num) in my_warehouses:
+        print(f"Items in warehouse {ware_num}:\n")
+        for i in stock:
+            if i.warehouse_id == str(ware_num):
+                for item in i.stock:
+                    print(item)
+                print(f"len(i.stock))
+                return len(i.stock)
+    else:
+        print("Error! this warehouse is out of range")
 
 
 # search and order items:

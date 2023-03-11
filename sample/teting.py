@@ -1,30 +1,21 @@
 from loader import Loader
 from classes import *
-from data import stock, personnel
 from methods import *
+stock = Loader(model="stock")   # dict with model and objects keys, objects= 4 warehouse objects
+personnel = Loader(model="personnel")
+# print(stock.__dict__)
 
+for employee in personnel:
+    print(employee._name)
+print(len(list(stock))) # amount of warehouses
 
 user_history = []  # list with user actions
 
-# user_name = User(get_name())   # Get the user_name
-#
-# print(greet_user(user_name._name))    # greet user
+user_name = User(get_name())   # Get the user_name
 
-stock = Loader(model="stock")   # new data form:list with object for each warehouse
-personnel = Loader(model="personnel")
-ware1 = stock.objects[0]
+print(greet_user(user_name._name))    # greet user
 
-# print(personnel.objects)
-print(ware1.__dict__["stock"][0])
-
-
-
-
-
-
-
-
-x = 0  # starting a loop that is keeping the user on the menu for as long as he wants
+x = 0  # keeping the user on the menu for as long as he wants
 while x == 0:
     # Get the user selection(num) :
     user_selection = select_operator()
@@ -32,7 +23,7 @@ while x == 0:
     # Execute operation:
     if user_selection == 1:           # list of each warehouse and the items in it plus total items in each warehouse
         list_of_items()
-        user_history.append(f"Listed {list_of_items()} items")
+        # user_history.append(f"Listed {list_of_items()} items")
 
     elif user_selection == 2:
         item_name = search_item()
