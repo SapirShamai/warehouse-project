@@ -4,14 +4,16 @@ from classes import *
 stock = Loader(model="stock")   # dict with model and objects keys, objects= 4 warehouse objects
 personnel = Loader(model="personnel")
 
+
 # to get the name of the user:
 def get_name():
-    return input("Please enter your name: ").capitalize()
+    return User(input("Please enter your name: ").capitalize())
 
 
 # to greet the user:
 def greet_user(name):
-    return (f"Hallo, {name}!")
+    return f"Hallo, {name}!"
+
 
 # to get number of operator from the menu:
 def select_operator():
@@ -21,7 +23,7 @@ def select_operator():
     3. Browse by category
     4. Quit
     """
-    return int(input(f"What would you like to do: \n{menu}\nType the number of the operation: "))
+    return int(input(f"What would you like to do: \n{menu}\nType the number of the operation:\n"))
 
 
 # print the list of items and how many in which warehouse:
@@ -36,63 +38,40 @@ def list_of_items():
             if i.warehouse_id == str(ware_num):
                 for item in i.stock:
                     print(item)
-                print(f"len(i.stock))
-                return len(i.stock)
+                print(f"\nTotal items in warehouse {ware_num}: {i.occupancy()}")
+                return i.occupancy()
     else:
         print("Error! this warehouse is out of range")
 
 
 # search and order items:
-def search_item():
-    ''' return the name of the chosen item '''                   # get the item name
+def get_name_of_item():
+    ''' return the name of the chosen item '''
 
-    item_name = input("What is the name of the item? ").lower()
+    item_name = input("What is the name of the item?\n").lower()
     return item_name
 
 
-def show_search_result(item_name, stock):                          # search item in stock
+def show_search_result(item_name):
     '''
-    print the search result:
-    total amount of item (from search_item()) in stock,
-    on which warehouse, how long in stock, max availability
+    takes the name of the item that the user wants to search for
+    returns the total amount
     '''
-    x = 0
-    while x == 0:
-        amount = 0
-        for item in stock:
-            if (item["state"] + " " + item["category"]).lower() == item_name:
-                amount += 1
-        print(f"Total amount available: {amount}")
-
-        print("Location: ")
-        warehouses = {}
-        for item in stock:
-            key = item["warehouse"]
-            now = datetime.now()
-            item_time = datetime.strptime(item["date_of_stock"], "%Y-%m-%d %H:%M:%S")
-            time_in_stock = str((now - item_time).days)
-            if (item["state"] + " " + item["category"]).lower() == item_name:
-                print("Warehouse " + str(item["warehouse"]) + ": " + time_in_stock + " days in stock")
-                if key not in warehouses.keys():
-                    warehouses[key] = 1
-                else:
-                    warehouses[key] += 1
-        for key, value in warehouses.items():
-            print(f"-Total amount in Warehouse {key}: {value} items")
-
-        if warehouses:
-            my_max = max(warehouses.items(), key=lambda x:x[1])
-            print(f"\nMaximum availability {my_max[1]} in Warehouse {my_max[0]}")
-            x = 1
-
-        elif not warehouses:
-            answer = input(f"{item_name} is not in stock, would you like to search for a different item? ").lower()
-            if answer == "y":
-                item_name = search_item()
-                x = 0
-            else:
-                x = 1
-    return warehouses
+    now = datetime.now()
+    total_amount = 0
+    for item in stock.objects:  # -> warehouse object
+        my_list_items = item.search_item(item_name)  # -> list of matches
+        if not my_list_items:  # -> falsy
+            print("We couldn't find this item in our warehouses")
+            break
+        else:
+            print(f"Warehouse {item.warehouse_id} total amount: {len(my_list_items)}")
+            for i in my_list_items:  # -> item object
+                total_amount += 1
+                item_time = datetime.strptime(i.date_of_stock, "%Y-%m-%d %H:%M:%S")
+                print(f"{i} in warehouse: {i.warehouse}, {(now - item_time).days} days in stock")
+    print(f"Total amount: {total_amount}")
+    return total_amount
 
 
 # order the item:

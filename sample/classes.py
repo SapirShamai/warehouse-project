@@ -27,15 +27,16 @@ class Warehouse:
         '''
         matching_items = []
         for i in self.stock:
-            if search_term.lower() == i:
+            if search_term.lower() == (i.state + " " + i.category).lower():
                 matching_items.append(i)
         return matching_items
 
 
 class Item:
-    def __init__(self, state: str, category: str, date_of_stock: datetime, warehouse: int):
+    def __init__(self, state: str, category: str, warehouse: int, date_of_stock: datetime):
         self.state = state
         self.category = category
+        self.warehouse = warehouse
         self.date_of_stock = date_of_stock
 
     def __str__(self):

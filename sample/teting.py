@@ -5,13 +5,14 @@ stock = Loader(model="stock")   # dict with model and objects keys, objects= 4 w
 personnel = Loader(model="personnel")
 # print(stock.__dict__)
 
-for employee in personnel:
-    print(employee._name)
-print(len(list(stock))) # amount of warehouses
+#
+# for employee in personnel:
+#     print(employee._name)
+
 
 user_history = []  # list with user actions
 
-user_name = User(get_name())   # Get the user_name
+user_name = get_name()   # Get the user_name -> User object
 
 print(greet_user(user_name._name))    # greet user
 
@@ -21,17 +22,17 @@ while x == 0:
     user_selection = select_operator()
 
     # Execute operation:
-    if user_selection == 1:           # list of each warehouse and the items in it plus total items in each warehouse
-        list_of_items()
-        # user_history.append(f"Listed {list_of_items()} items")
+    if user_selection == 1:         # listing items by warehouse, users choice
+        user_history.append(f"Listed {list_of_items()} items")  # adding to history
 
     elif user_selection == 2:
-        item_name = search_item()
-        result = show_search_result(item_name, stock)
+        item_name = get_name_of_item()
+        show_search_result(item_name)
+        # result = show_search_result(item_name, stock)
         user_history.append(f"Searched {item_name}")
-        if result:
-
-            user_history.append(f"Ordered {order_an_item(item_name, result, user_name)}")
+        # if result:
+        #
+        #     user_history.append(f"Ordered {order_an_item(item_name, result, user_name)}")
 
     elif user_selection == 3:
         user_history.append(f"Browsed the category {browse_by_category(stock)}")
@@ -50,5 +51,5 @@ while x == 0:
 
 # end:
 
-print(f"Thank you for your visit, {user_name}!\nIn this session you have:")
+print(f"Thank you for your visit, {user_name._name}!\nIn this session you have:")
 my_user_history(user_history)

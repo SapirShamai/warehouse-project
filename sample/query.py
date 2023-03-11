@@ -1,7 +1,7 @@
 from data import stock, personnel
 from datetime import datetime
 from collections import Counter
-from methods import get_name, greet_user, select_operator, list_of_items, search_item, show_search_result, order_an_item, browse_by_category, my_user_history
+from methods import get_name, greet_user, select_operator, list_of_items, get_name_of_item, show_search_result, order_an_item, browse_by_category, my_user_history
 
 user_history = []  # a list that i'm adding to the users actions
 # Get the user_name:
@@ -21,7 +21,7 @@ while x == 0:
         user_history.append(f"Listed {list_of_items()} items")
 
     elif user_selection == 2:
-        item_name = search_item()
+        item_name = get_name_of_item()
         result = show_search_result(item_name, stock)
         user_history.append(f"Searched {item_name}")
         if result:
