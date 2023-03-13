@@ -61,7 +61,7 @@ def show_search_result(item_name):
     total_amount = 0
     for item in stock.objects:  # -> warehouse object
         my_list_items = item.search_item(item_name)  # -> list of matches
-        if not my_list_items:  # -> falsy
+        if not my_list_items:  # -> falsy (if not false)
             print("We couldn't find this item in our warehouses")
             break
         else:
