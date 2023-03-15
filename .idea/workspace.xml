@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="completed list_of_items(), show_search_result() functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/methods.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/teting.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/teting.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678562455459</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="completed list_of_items(), show_search_result() functions">
+      <created>1678710077531</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1678710077531</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,6 +165,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/sample/teting.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

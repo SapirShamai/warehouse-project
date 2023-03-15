@@ -23,7 +23,7 @@ class Warehouse:
 
     def search_item(self, search_term):
         '''
-        to find a specific item in the list of items
+        to find items that are matching to the search term, lopping a list of Item object
         '''
         matching_items = []
         for i in self.stock:
@@ -82,12 +82,15 @@ class Employee(User):       # this class is for users that are also employees
         constractor, takes the uer name from super
         private property password
         '''
-        User.__init__(self, user_name)
+        super().__init__(user_name)
         self.__password = password
-        if head_of == "":
-            self.head_of = []
-        else:
-            self.head_of = head_of
+        self.head_of = []
+        if head_of is not None:
+            for i in head_of:
+                self.head_of.append(Employee(i["user_name"], i["password"]))
+
+    def get_password(self):
+        return self.__password
 
     def authenticate(self, password):
         '''
