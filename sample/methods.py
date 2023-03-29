@@ -44,7 +44,7 @@ def list_of_items():
         my_warehouses.append(i.warehouse_id)
     if ware_num in my_warehouses:
         print(f"Items in warehouse {ware_num}:\n")
-        for i in stock:
+        for i in stock:  # -> stock of ware object
             if i.warehouse_id == ware_num:
                 for item in i.stock:
                     print(item)
@@ -75,7 +75,7 @@ def show_search_result(item_name):
             print("We couldn't find this item in our warehouses")
             break
         else:
-            print(f"Warehouse {ware.warehouse_id} total amount: {len(my_list_items)}")  # -> to get total amount in each ware
+            print(f"Warehouse {ware.warehouse_id} total amount: {len(my_list_items)}")
             total_amount += len(my_list_items)
     print(f"Total amount: {total_amount}")
     return total_amount
@@ -151,10 +151,8 @@ def browse_by_category():
     return my_str_category
 
 
-def my_user_history(*user_history):
-    '''
-    this function takes a list of users actions and returns then numbered one by one
-    '''
-    for index, action in enumerate(*user_history):
-        print(index + 1, ".", action)
-
+# def my_user_history(*user_history):
+#     '''this function takes a list of users actions and returns them numbered one by one'''
+#     for index, action in enumerate(*user_history):
+#         print(index + 1, ".", action)
+#

@@ -73,10 +73,16 @@ class User:
         please ask one of our staff members to assist you.""")
 
     def bye(self):
-        return f"Thank you for your visit, {self._name}!"
+        print(f"Thank you for your visit, {self._name}!")
+
+    @property
+    def name(self):
+        return self._name
 
 
-class Employee(User):       # this class is for users that are also employees
+class Employee(User):
+    list_of_actions = []    # list to sum employee actions
+
     def __init__(self, user_name, password, head_of=None):
         '''
         constractor, takes the uer name from super
@@ -84,10 +90,16 @@ class Employee(User):       # this class is for users that are also employees
         '''
         super().__init__(user_name)
         self.__password = password
-        self.head_of = []
         if head_of is not None:
+            self.head_of = []
             for i in head_of:
-                self.head_of.append(Employee(i["user_name"], i["password"]))
+                if "head_of" in i.keys():
+                    self.head_of.append(Employee(i["user_name"], i["password"], i["head_of"]))
+                else:
+                    self.head_of.append(Employee(i["user_name"], i["password"]))
+
+        else:
+            self.head_of = head_of
 
     def get_password(self):
         return self.__password
@@ -111,12 +123,11 @@ class Employee(User):       # this class is for users that are also employees
 
     def bye(self):
         '''
-        returns list of all the actions the employee did with the system
+        returns bye message list of all the actions the employee did with the system
         '''
-        User.bye(self)             # todo: create list of user actions
+        User.bye(self)
         print("Your actions summary:")
-        list_of_actions = []
-        for action in list_of_actions:
-            print(action)
+        for index, action in enumerate(Employee.list_of_actions):
+            print(index + 1, ".", action)
 
 
