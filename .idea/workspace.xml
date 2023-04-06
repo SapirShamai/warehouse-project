@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="completed greet the user">
-      <change afterPath="$PROJECT_DIR$/sample/testing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/warehouseproject-SapirShamai.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/warehouseproject-SapirShamai.iml" afterDir="false" />
+    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="completed bye in both classes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/classes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/data.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/query.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/testing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,14 +34,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/user/PycharmProjects/practice/warehouseproject-SapirShamai/sample&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/home/user/PycharmProjects/practice/warehouseproject-SapirShamai/sample",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/sample" />
@@ -156,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678912879829</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="completed bye in both classes">
+      <created>1680120440964</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1680120440964</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -180,7 +184,8 @@
     <MESSAGE value="created classes.py with 4 main classes" />
     <MESSAGE value="completed list_of_items(), show_search_result() functions" />
     <MESSAGE value="completed greet the user" />
-    <option name="LAST_COMMIT_MESSAGE" value="completed greet the user" />
+    <MESSAGE value="completed bye in both classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="completed bye in both classes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

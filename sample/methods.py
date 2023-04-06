@@ -1,7 +1,8 @@
 from collections import Counter
 from loader import Loader
 from classes import *
-stock = Loader(model="stock")   # dict with model and objects keys, objects= 4 warehouse objects
+
+stock = Loader(model="stock")  # dict with model and objects keys, objects= 4 warehouse objects
 personnel = Loader(model="personnel")
 
 
@@ -10,18 +11,17 @@ def get_name():
     return input("Please enter your name: ").capitalize()
 
 
-employee_names = []
 def get_emp_name(list_emp_obj):
     '''
      takes a list with employee objects and returns a list with all employees names
-     the list ia outside of the func because it's recursive
+     the list ia outside the func because it's recursive
     '''
-
+    employee_names = []
     for employee in list_emp_obj:
         # print(employee._name) # -> gust to get the names, no list
         employee_names.append(employee)
         if employee.head_of:  # -> truthy
-            get_emp_name(employee.head_of)  # -> calling hte func recursively
+            employee_names += get_emp_name(employee.head_of)  # -> calling the func recursively adding the names to list
     return employee_names
 
 
@@ -40,7 +40,7 @@ def select_operator():
 def list_of_items():
     ware_num = input("Which warehouse would you like to view?\n")
     my_warehouses = []
-    for i in stock:   # items are 4 warehouse objects, in each there is ware_id and stock
+    for i in stock:  # items are 4 warehouse objects, in each there is ware_id and stock
         my_warehouses.append(i.warehouse_id)
     if ware_num in my_warehouses:
         print(f"Items in warehouse {ware_num}:\n")
@@ -71,7 +71,7 @@ def show_search_result(item_name):
     total_amount = 0
     for ware in stock.objects:  # -> warehouse object
         my_list_items = ware.search_item(item_name)  # -> list of matches
-        if not my_list_items:  # -> falsy (if not false)
+        if not my_list_items:  # -> falsy
             print("We couldn't find this item in our warehouses")
             break
         else:
@@ -81,51 +81,54 @@ def show_search_result(item_name):
     return total_amount
 
 
-# order the item:
-def order_an_item(item_name):
+# order functions (only for employee):
 
-    '''
-    user gets here only if Employee, can view items by ware and place order.
-    return true or false uses for the user history
-    '''
+def want_to_order(item_name):
+    """check if user interested in placing an order"""
 
     order = input(f"Would you like to place an order for {item_name}?  Y/N \n").lower()
+    ware_id = input("From which warehouse would you like to place your order?\n")
     if order == "y":
-        ware_id = input("From which warehouse would you like to place your order?\n")
-        my_wares = []   # to check if users warehouse exist, list with id only (str)
+        my_ware_ids = []
         for ware in stock:
-            my_wares.append(ware.warehouse_id)
-
-        if ware_id in my_wares:  # -> checking if exist
-            for ware in stock.objects:  # -> warehouse objects
-                if ware.warehouse_id == ware_id:
-                    my_list_items = ware.search_item(item_name)  # -> list of matches from specific ware
-            print(f"Total amount in warehouse{ware_id}: {len(my_list_items)}")
-
-            now = datetime.now()
-            for i in my_list_items:
-                item_time = datetime.strptime(i.date_of_stock, "%Y-%m-%d %H:%M:%S")
-                print(f"{i} in warehouse: {i.warehouse}, {(now - item_time).days} days in stock")
-
-            item_amount = int(input(f"How many {item_name}s would you like to order?\n"))
-            if 0 < item_amount <= len(my_list_items):
-                print("Your order has been placed !")
-                return True
-            else:
-                print("Error! this amount is not available")
-                answer = input(f"Maximum amount is {len(my_list_items)}, would you like to place order? Y/N\n").lower()
-                if answer == "y":
-                    print("Your order has been placed !")
-                    return True
-                else:
-                    return False
+            my_ware_ids.append(ware.warehouse_id)
+        if ware_id in my_ware_ids:
+            return ware_id
         else:
             print("Error! this warehouse is not exist")
             return False
 
 
-def browse_by_category():
+def show_available_to_order(item_name, warehouse_id):
+    """list the items in a specific warehouse, return list of matching items by ware """
+    for ware in stock:
+        if ware.warehouse_id == warehouse_id:
+            my_list_items = ware.search_item(item_name)  # -> list of matches from specific ware
+            print(f"Total amount in warehouse{warehouse_id}: {len(my_list_items)}")
 
+            now = datetime.now()  # print the items and how long in stock
+            for i in my_list_items:
+                item_time = datetime.strptime(i.date_of_stock, "%Y-%m-%d %H:%M:%S")
+                print(f"{i} in warehouse: {i.warehouse}, {(now - item_time).days} days in stock")
+            return my_list_items
+
+
+def order_an_item(item_name, list_of_matches_in_ware):
+    """order the item and check right quantity"""
+    item_amount = int(input(f"How many {item_name}s would you like to order?\n"))
+    if 0 < item_amount <= len(list_of_matches_in_ware):
+        print("Your order has been placed !")
+        return True
+    else:
+        print("Error! this amount is not available")
+        answer = input(f"Maximum amount is {len(list_of_matches_in_ware)}, would you like to place order? Y/N\n").lower()
+        if answer == "y":
+            print("Your order has been placed !")
+            return True
+    return False
+
+
+def browse_by_category():
     '''
     listing the categories, browse items full name and location by category.
     return the name of the category that has benn browsed
@@ -140,8 +143,8 @@ def browse_by_category():
     for index, (key, value) in enumerate(categories.items()):
         print(f"{index + 1}. {key} ({value})")
 
-    users_choice = int(input("\nType the number of the category to browse: "))       # to get the number
-    my_str_category = (list(categories)[users_choice - 1])                         # the item name
+    users_choice = int(input("\nType the number of the category to browse: "))  # to get the number
+    my_str_category = (list(categories)[users_choice - 1])  # the item name
     print(f"\nList of {my_str_category} available:")
     for ware in stock:  # -> loop ware objects
         for i in ware.stock:  # -> loop item objects in each ware
@@ -149,10 +152,3 @@ def browse_by_category():
                 print(f"- {i.state} {i.category}, Warehouse: {i.warehouse}")
 
     return my_str_category
-
-
-# def my_user_history(*user_history):
-#     '''this function takes a list of users actions and returns them numbered one by one'''
-#     for index, action in enumerate(*user_history):
-#         print(index + 1, ".", action)
-#

@@ -81,14 +81,14 @@ class User:
 
 
 class Employee(User):
-    list_of_actions = []    # list to sum employee actions
+    list_of_actions = []  # list to sum employee actions
 
     def __init__(self, user_name, password, head_of=None):
         '''
         constractor, takes the uer name from super
         private property password
         '''
-        super().__init__(user_name)
+        super().__init__(user_name)  # -> attribute from user= _name
         self.__password = password
         if head_of is not None:
             self.head_of = []
@@ -129,5 +129,3 @@ class Employee(User):
         print("Your actions summary:")
         for index, action in enumerate(Employee.list_of_actions):
             print(index + 1, ".", action)
-
-
