@@ -1,8 +1,10 @@
 from methods import *
 
+# data:
 stock = Loader(model="stock")  # dict with model and objects keys, objects= 4 warehouse objects
 personnel = Loader(model="personnel")
 
+# user part:
 while True:
     user_name = get_name()  # Get the user_name
     guest = input("Would you like to continue as a guest? Y/N\n").lower()
@@ -12,31 +14,27 @@ while True:
         user_name.greet()
         break
     else:
-        password = input("Please enter your password:\n")
-        my_emps = get_emp_name(personnel)  # -> return list with all employee objects
-        match = 0
-        for employee in my_emps:
-            if employee.is_named(user_name) and employee.authenticate(password):
-                user_name = employee
-                user_name.greet()  # -> greet employee
-                match = 1
-
-        if match:
+        my_employees = get_employees_names(personnel)   # -> return list with all employee objects
+        user_name = varify_employee(user_name, my_employees)  # -> return user as employee object
+        if isinstance(user_name, Employee):
             break
         else:
-            answer = input("User name or password is wrong, would you like to try again?\n").lower()
+            answer = input("User name or password is wrong, would you like to try again? Y/N\n").lower()
             if answer == "y":
                 continue
             else:
+                user_name = User(user_name)  # -> greet user
+                user_name.greet()
                 break
 
+
+# actions in warehouse:
 while True:
 
     user_selection = select_operator()  # Get the user selection(num)
 
     if user_selection == 1:  # listing items by warehouse
-        Employee.list_of_actions.append(f"Listed {list_of_items()} items")  # adding to history
-        # I'm adding to history anyway, return the history only if user is employee
+        Employee.list_of_actions.append(f"Listed {list_of_items(stock)} ")  # adding to history anyway
 
     elif user_selection == 2:
         # search part:
@@ -53,7 +51,7 @@ while True:
                     Employee.list_of_actions.append(f"Ordered {item_name}")
 
     elif user_selection == 3:
-        Employee.list_of_actions.append(f"Browsed the category {browse_by_category()}")
+        Employee.list_of_actions.append(f"Browsed the category {browse_by_category(stock)}")
 
     elif user_selection == 4:
         break
@@ -71,6 +69,5 @@ while True:
 
 if type(user_name) is Employee:
     user_name.bye()
-
 else:
     user_name.bye()
