@@ -1,10 +1,5 @@
 from collections import Counter
-from loader import Loader
 from classes import *
-
-# data:
-stock = Loader(model="stock")  # dict with model and objects keys, objects= 4 warehouse objects
-personnel = Loader(model="personnel")
 
 
 # to get the name of the user:
@@ -58,16 +53,16 @@ def select_operator():
 
 
 # print the list of items and how many in which warehouse:
-def list_of_items(my_stock):
+def list_of_items(stock):
     """takes list with warehouse objects listing all the item return ware_id and total num of items """
 
     ware_id = input("Which warehouse would you like to view?\n")
     my_ware_ids = []
-    for ware in my_stock:
+    for ware in stock:
         my_ware_ids.append(ware.warehouse_id)
     if ware_id in my_ware_ids:
         print(f"Items in warehouse {ware_id}:\n")
-        for i in my_stock:
+        for i in stock:
             if i.warehouse_id == ware_id:
                 for item in i.stock:  # -> stock of ware object
                     print(item)
@@ -85,7 +80,7 @@ def get_name_of_item():
     return item_name
 
 
-def show_search_result(item_name):
+def show_search_result(item_name, stock):
     """takes the name of the item that the user wants to search for
     returns the total amount"""
 
@@ -104,7 +99,7 @@ def show_search_result(item_name):
 
 # order functions (only for employee):
 
-def want_to_order(item_name):
+def want_to_order(item_name, stock):
     """check if user interested in placing an order and if the warehouse exists in the stock wares"""
 
     order = input(f"Would you like to place an order for {item_name}?  Y/N \n").lower()
@@ -120,7 +115,7 @@ def want_to_order(item_name):
             return False
 
 
-def show_available_to_order(item_name, warehouse_id):
+def show_available_to_order(item_name, warehouse_id, stock):
     """list the items in a specific warehouse, return list of matching items by ware """
 
     for ware in stock:
@@ -151,23 +146,30 @@ def order_an_item(item_name, list_of_matches_in_ware):
     return False
 
 
-def browse_by_category(my_stock):
-    """listing the categories, browse items full name and location by category.
-    return the name of the category that has benn browsed"""
+# categories functions:
+def create_categories(stock):
+    """print list to user with categories and amount from each category
+    return dict with this info"""
 
     print("****** Categories ******\n")
     my_category_list = []
-    for ware in my_stock:
+    for ware in stock:
         for i in ware.stock:
             my_category_list.append(i.category)
     categories = dict(Counter(my_category_list))
     for index, (key, value) in enumerate(categories.items()):
         print(f"{index + 1}. {key} ({value})")
+    return categories
+
+
+def browse_by_category(categories_dict, stock):
+    """takes dict convert it to a list of keys, browse items full name and location by category.
+    return the name of the category that has been browsed"""
 
     users_choice = int(input("\nType the number of the category to browse: "))
-    my_str_category = (list(categories)[users_choice - 1])  # -> list with only the keys
+    my_str_category = (list(categories_dict)[users_choice - 1])  # -> list with only the keys
     print(f"\nList of {my_str_category} available:")
-    for ware in my_stock:  # -> loop ware objects
+    for ware in stock:  # -> loop ware objects
         for i in ware.stock:  # -> loop item objects in each ware
             if i.category == my_str_category:
                 print(f"- {i.state} {i.category}, Warehouse: {i.warehouse}")
