@@ -4,12 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="completed bye in both classes">
+    <list default="true" id="c48a776b-df1b-4f46-97d2-e6ca920e760e" name="Changes" comment="divided browse function into two">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/classes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/methods.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sample/query.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/query.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sample/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/sample/testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sample/testing.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,7 +160,28 @@
       <option name="project" value="LOCAL" />
       <updated>1680120440964</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="divided the order function into three">
+      <created>1680790841793</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1680790841793</updated>
+    </task>
+    <task id="LOCAL-00016" summary="divided the order function into three">
+      <created>1680901556535</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1680901556535</updated>
+    </task>
+    <task id="LOCAL-00017" summary="divided browse function into two">
+      <created>1681072207631</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1681072207631</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,7 +206,9 @@
     <MESSAGE value="completed list_of_items(), show_search_result() functions" />
     <MESSAGE value="completed greet the user" />
     <MESSAGE value="completed bye in both classes" />
-    <option name="LAST_COMMIT_MESSAGE" value="completed bye in both classes" />
+    <MESSAGE value="divided the order function into three" />
+    <MESSAGE value="divided browse function into two" />
+    <option name="LAST_COMMIT_MESSAGE" value="divided browse function into two" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

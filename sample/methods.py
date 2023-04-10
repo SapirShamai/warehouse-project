@@ -7,6 +7,20 @@ def get_name():
     return input("Please enter your name: ").capitalize()
 
 
+def create_user_object(user_name):
+    """create user object with given username or anonymous, greet the user
+    return user_name as a User object"""
+
+    if user_name == "":
+        user_name = User()
+        user_name.greet()
+        return user_name
+    else:
+        user_name = User(user_name)
+        user_name.greet()
+        return user_name
+
+
 def get_employees_names(list_emp_obj):
     """takes a list with employee objects and returns a list with all employees names
      the list ia outside the func because it's recursive"""
@@ -130,18 +144,18 @@ def show_available_to_order(item_name, warehouse_id, stock):
             return my_list_items
 
 
-def order_an_item(item_name, list_of_matches_in_ware):
+def order_an_item(user_name, item_name, list_of_matches_in_ware):
     """order the item and check right quantity"""
 
     item_amount = int(input(f"\nHow many {item_name}s would you like to order?\n"))
     if 0 < item_amount <= len(list_of_matches_in_ware):   # check if amount in ware
-        print(f"Your order: {item_name} {item_name}s has been placed !")
+        user_name.order(item_name, item_amount)
         return True
     else:
         print("Error! this amount is not available")
         answer = input(f"Maximum amount is {len(list_of_matches_in_ware)}, would you like to place order? Y/N\n").lower()
         if answer == "y":
-            print("Your order has been placed !")
+            user_name.order(item_name, len(list_of_matches_in_ware))
             return True
     return False
 

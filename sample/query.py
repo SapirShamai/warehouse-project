@@ -10,8 +10,7 @@ while True:
     guest = input("Would you like to continue as a guest? Y/N\n").lower()
 
     if guest == "y":
-        user_name = User(user_name)  # -> greet user
-        user_name.greet()
+        user_name = create_user_object(user_name)  # -> create and greet the User
         break
     else:
         my_employees = get_employees_names(personnel)   # -> return list with all employee objects
@@ -23,8 +22,7 @@ while True:
             if answer == "y":
                 continue
             else:
-                user_name = User(user_name)  # -> greet user
-                user_name.greet()
+                user_name = create_user_object(user_name)  # -> create and greet the User
                 break
 
 
@@ -46,7 +44,7 @@ while True:
             ware_id = want_to_order(item_name, stock)
             if int(ware_id) > 0:
                 list_matching_items_by_ware = show_available_to_order(item_name, ware_id, stock)
-                my_order = order_an_item(item_name, list_matching_items_by_ware)
+                my_order = order_an_item(user_name, item_name, list_matching_items_by_ware)
                 if my_order:    # -> only if order has been placed add to history
                     Employee.list_of_actions.append(f"Ordered {item_name}")
 
